@@ -6,8 +6,13 @@
   <include file="$(find carl_safety)/launch/carl_safety_interface.launch" />
 
   <!-- Web Nodes -->
-  <node name="proxy" pkg="interactive_marker_proxy" type="proxy" output="screen">
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
+  <node name="arm_proxy" pkg="interactive_marker_proxy" type="proxy" output="screen">
     <remap from="topic_ns" to="/carl_interactive_manipulation" />
+    <remap from="target_frame" to="/base_footprint" />
+  </node>
+  <node name="parking_marker_proxy" pkg="interactive_marker_proxy" type="proxy" output="screen">
+    <remap from="topic_ns" to="/parking_markers" />
     <remap from="target_frame" to="/base_footprint" />
   </node>
   <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher" output="screen" />
