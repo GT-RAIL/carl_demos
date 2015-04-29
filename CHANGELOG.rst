@@ -2,6 +2,11 @@
 Changelog for package carl_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.6 (2015-04-29)
+------------------
+* Removed nav from basic web demo launch
+* Contributors: David Kent
+
 0.0.5 (2015-02-06)
 ------------------
 * Updated launch file to reflect changes in carl_safety
