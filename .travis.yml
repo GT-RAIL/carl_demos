@@ -21,20 +21,10 @@ install:
   - mkdir -p /tmp/ws/src
   - ln -s `pwd` /tmp/ws/src/package
   - cd /tmp/ws/src
+  - git clone https://github.com/WPI-RAIL/queue_manager.git
   - git clone https://github.com/WPI-RAIL/carl_safety.git
   - git clone https://github.com/RIVeR-Lab/wpi_jaco.git
-  - git clone https://github.com/WPI-RAIL/carl_bot.git
-  - git clone https://github.com/sniekum/ar_track_alvar_msgs.git
-  - git clone https://github.com/sniekum/ar_track_alvar.git -b indigo-devel
-  - git clone https://github.com/WPI-RAIL/carl_navigation.git
-  - git clone https://github.com/WPI-RAIL/rail_ceiling.git
-  - git clone https://github.com/WPI-RAIL/rail_collada_models.git
-  - mkdir carl_description
-  - mkdir jaco_description
-  - mkdir wpi_jaco_msgs
-  - mv carl_bot/carl_description/* carl_description/
-  - mv wpi_jaco/jaco_description/* jaco_description/
-  - mv wpi_jaco/wpi_jaco_msgs/* wpi_jaco_msgs/
+  - mv wpi_jaco/wpi_jaco_msgs .
   - rm -rf carl_bot wpi_jaco
   - cd ../
   - rosdep install --from-paths src --ignore-src --rosdistro hydro -y
