@@ -25,7 +25,7 @@
   <run_depend>geometry_msgs</run_depend>
   <run_depend>interactive_marker_proxy</run_depend>
   <run_depend>libespeak-dev</run_depend>
-  <run_depend>queue_manager</run_depend>
+  <run_depend>rail_user_queue_manager</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>tf2_web_republisher</run_depend>
   <run_depend>web_video_server</run_depend>
