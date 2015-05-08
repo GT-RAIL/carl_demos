@@ -15,5 +15,5 @@
   <node name="web_video_server" pkg="web_video_server" type="web_video_server" output="screen">
     <param name="verbose" value="false" />
   </node>
-  <node name="rail_user_queue_manager" pkg="rail_user_queue_manager" type="queue_manager" output="screen" />
+  <node name="rail_user_queue_manager" pkg="rail_user_queue_manager" type="rail_user_queue_manager" output="screen" />
 </launch>
