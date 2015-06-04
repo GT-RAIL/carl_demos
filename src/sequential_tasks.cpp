@@ -8,6 +8,12 @@ SequentialTasks::SequentialTasks() :
     moveCarlClient("move_carl")
 {
   lookAtFrameClient = n.serviceClient<carl_dynamixel::LookAtFrame>("/asus_controller/look_at_frame");
+
+  ROS_INFO("Waiting for action servers...");
+  armClient.waitForServer();
+  obtainObjectClient.waitForServer();
+  moveCarlClient.waitForServer();
+  ROS_INFO("Initialized.");
 }
 
 void SequentialTasks::packSchoolBag()
