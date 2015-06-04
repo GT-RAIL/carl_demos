@@ -21,7 +21,7 @@ install:
   - mkdir -p /tmp/ws/src
   - ln -s `pwd` /tmp/ws/src/package
   - cd /tmp/ws/src
-  - git clone https://github.com/WPI-RAIL/queue_manager.git
+  - git clone https://github.com/WPI-RAIL/rail_user_queue_manager.git
   - git clone https://github.com/WPI-RAIL/carl_safety.git
   - git clone https://github.com/RIVeR-Lab/wpi_jaco.git
   - mv wpi_jaco/wpi_jaco_msgs .

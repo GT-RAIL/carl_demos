@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>carl_demos</name>
-  <version>0.0.6</version>
+  <version>0.0.7</version>
   <description>Demo Applications for CARL</description>
 
   <maintainer email="rctoris@wpi.edu">Russell Toris</maintainer>
@@ -35,7 +35,7 @@
   <run_depend>geometry_msgs</run_depend>
   <run_depend>interactive_marker_proxy</run_depend>
   <run_depend>libespeak-dev</run_depend>
-  <run_depend>queue_manager</run_depend>
+  <run_depend>rail_user_queue_manager</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>tf2_web_republisher</run_depend>
   <run_depend>web_video_server</run_depend>
