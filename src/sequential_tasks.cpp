@@ -18,10 +18,31 @@ SequentialTasks::SequentialTasks() :
 
 void SequentialTasks::packSchoolBag()
 {
-  obtainObject(carl_navigation::MoveCarlGoal::KITCHEN_TABLE, "tape");
+  //notebook
+  obtainObject(carl_navigation::MoveCarlGoal::COFFEE_TABLE, "notebook", "coffee_table_surface_link");
+
+  //look for glue
+  checkSurface(carl_navigation::MoveCarlGoal::KITCHEN_TABLE, "kitchen_table_surface_link");
+
+  //get feedback
+  //navigate to given location
+  carl_navigation::MoveCarlGoal moveGoal;
+  moveGoal.location = carl_navigation::MoveCarlGoal::INTERACTION_2;
+  moveCarlClient.sendGoal(moveGoal);
+  moveCarlClient.waitForResult(ros::Duration(60.0));
+  //look at chair
+  carl_dynamixel::LookAtFrame lookSrv;
+  lookSrv.request.frame = "lazy_chair_2_surface_link";
+  if (!lookAtFrameClient.call(lookSrv))
+  {
+    ROS_INFO("Could not call look at frame client!");
+    return;
+  }
+
+  ROS_INFO("Finished.");
 }
 
-void SequentialTasks::obtainObject(int location, string object)
+void SequentialTasks::checkSurface(int location, std::string surfaceLink)
 {
   ROS_INFO("Navigating to new location...");
   //navigate to given location
@@ -34,7 +55,45 @@ void SequentialTasks::obtainObject(int location, string object)
   ROS_INFO("Looking at surface...");
   //look at surface
   carl_dynamixel::LookAtFrame lookSrv;
-  lookSrv.request.frame = "kitchen_table_surface_link";
+  lookSrv.request.frame = surfaceLink;
+  if (!lookAtFrameClient.call(lookSrv))
+  {
+    ROS_INFO("Could not call look at frame client!");
+    return;
+  }
+  ROS_INFO("Looking at surface complete.");
+
+  ROS_INFO("Retracting arm...");
+  //retract arm
+  carl_moveit::ArmGoal retractGoal;
+  retractGoal.action = carl_moveit::ArmGoal::RETRACT;
+  armClient.sendGoal(retractGoal);
+  armClient.waitForResult(ros::Duration(20.0));
+  bool success = armClient.getResult()->success;
+  if (!success)
+  {
+    ROS_INFO("Could not ready arm after storing object.");
+    return;
+  }
+  ROS_INFO("Arm ready.");
+
+  ros::Duration(5.0).sleep();
+}
+
+void SequentialTasks::obtainObject(int location, string object, string surfaceLink)
+{
+  ROS_INFO("Navigating to new location...");
+  //navigate to given location
+  carl_navigation::MoveCarlGoal moveGoal;
+  moveGoal.location = location;
+  moveCarlClient.sendGoal(moveGoal);
+  moveCarlClient.waitForResult(ros::Duration(60.0));
+  ROS_INFO("Navigation complete.");
+
+  ROS_INFO("Looking at surface...");
+  //look at surface
+  carl_dynamixel::LookAtFrame lookSrv;
+  lookSrv.request.frame = surfaceLink;
   if (!lookAtFrameClient.call(lookSrv))
   {
     ROS_INFO("Could not call look at frame client!");
@@ -63,10 +122,9 @@ void SequentialTasks::obtainObject(int location, string object)
   carl_moveit::ArmGoal readyGoal;
   readyGoal.action = carl_moveit::ArmGoal::READY;
   armClient.sendGoal(readyGoal);
-  bool completed = armClient.waitForResult(ros::Duration(20.0));
-  bool succeeded = (armClient.getState() == actionlib::SimpleClientGoalState::SUCCEEDED);
+  armClient.waitForResult(ros::Duration(20.0));
   bool success = armClient.getResult()->success;
-  if (!completed || !succeeded || !success)
+  if (!success)
   {
     ROS_INFO("Could not ready arm after storing object.");
     return;

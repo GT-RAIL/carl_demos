@@ -29,7 +29,9 @@ public:
   */
   void packSchoolBag();
 
-  void obtainObject(int location, std::string object);
+  void checkSurface(int location, std::string surfaceLink);
+
+  void obtainObject(int location, std::string object, std::string surfaceLink);
 
 private:
   ros::NodeHandle n;
