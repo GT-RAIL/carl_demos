@@ -8,6 +8,7 @@
 #include <carl_moveit/ArmAction.h>
 #include <carl_moveit/ObtainObjectAction.h>
 #include <carl_navigation/MoveCarlAction.h>
+#include <wpi_jaco_msgs/HomeArmAction.h>
 
 #define NUM_JACO_JOINTS 6
 #define MAX_HOME_ATTEMPTS 3
@@ -39,6 +40,7 @@ private:
   ros::ServiceClient lookAtFrameClient;
 
   actionlib::SimpleActionClient<carl_moveit::ArmAction> armClient;
+  actionlib::SimpleActionClient<wpi_jaco_msgs::HomeArmAction> armHomeClient;
   actionlib::SimpleActionClient<carl_moveit::ObtainObjectAction> obtainObjectClient;
   actionlib::SimpleActionClient<carl_navigation::MoveCarlAction> moveCarlClient;
 };

@@ -1,9 +1,11 @@
 #include <carl_demos/sequential_tasks.h>
+#include "../../../devel/include/wpi_jaco_msgs/HomeArmGoal.h"
 
 using namespace std;
 
 SequentialTasks::SequentialTasks() :
     armClient("carl_moveit_wrapper/common_actions/arm_action"),
+    armHomeClient("jaco_arm/home_arm"),
     obtainObjectClient("carl_moveit_wrapper/high_level_actions/obtain_object"),
     moveCarlClient("move_carl")
 {
@@ -13,6 +15,7 @@ SequentialTasks::SequentialTasks() :
   armClient.waitForServer();
   obtainObjectClient.waitForServer();
   moveCarlClient.waitForServer();
+  armHomeClient.waitForServer();
   ROS_INFO("Initialized.");
 }
 
@@ -25,7 +28,6 @@ void SequentialTasks::packSchoolBag()
   checkSurface(carl_navigation::MoveCarlGoal::KITCHEN_TABLE, "kitchen_table_surface_link");
 
   //get feedback
-  //navigate to given location
   carl_navigation::MoveCarlGoal moveGoal;
   moveGoal.location = carl_navigation::MoveCarlGoal::INTERACTION_2;
   moveCarlClient.sendGoal(moveGoal);
@@ -38,6 +40,69 @@ void SequentialTasks::packSchoolBag()
     ROS_INFO("Could not call look at frame client!");
     return;
   }
+
+  /*
+  //tape
+  obtainObject(carl_navigation::MoveCarlGoal::KITCHEN_TABLE, "tape", "kitchen_table_surface_link");
+
+  //look for pencil
+  checkSurface(carl_navigation::MoveCarlGoal::COFFEE_TABLE, "coffee_table_surface_link");
+
+  //get feedback
+  carl_navigation::MoveCarlGoal moveGoal;
+  moveGoal.location = carl_navigation::MoveCarlGoal::INTERACTION_1;
+  moveCarlClient.sendGoal(moveGoal);
+  moveCarlClient.waitForResult(ros::Duration(60.0));
+  //look at chair
+  carl_dynamixel::LookAtFrame lookSrv;
+  lookSrv.request.frame = "lazy_chair_2_surface_link";
+  if (!lookAtFrameClient.call(lookSrv))
+  {
+    ROS_INFO("Could not call look at frame client!");
+    return;
+  }
+  */
+
+  /*
+  //pens
+  obtainObject(carl_navigation::MoveCarlGoal::COFFEE_TABLE, "pens", "coffee_table_surface_link");
+
+  //ruler
+  obtainObject(carl_navigation::MoveCarlGoal::KITCHEN_TABLE, "ruler", "kitchen_table_surface_link");
+
+  //scissors
+  obtainObject(carl_navigation::MoveCarlGoal::KITCHEN_TABLE, "scissors", "kitchen_table_surface_link");
+
+  //look for apple
+  //TODO: figure out counter surface link name
+  checkSurface(carl_navigation::MoveCarlGoal::FRIDGE, "");
+
+  //get feedback
+  carl_navigation::MoveCarlGoal moveGoal;
+  moveGoal.location = carl_navigation::MoveCarlGoal::INTERACTION_2;
+  moveCarlClient.sendGoal(moveGoal);
+  moveCarlClient.waitForResult(ros::Duration(60.0));
+  //look at chair
+  carl_dynamixel::LookAtFrame lookSrv;
+  lookSrv.request.frame = "lazy_chair_2_surface_link";
+  if (!lookAtFrameClient.call(lookSrv))
+  {
+    ROS_INFO("Could not call look at frame client!");
+    return;
+  }
+  */
+
+  /*
+  //orange
+  //TODO: figure out counter surface link name
+  obtainObject(carl_navigation::MoveCarlGoal::FRIDGE, "");
+
+  //return bag
+  carl_navigation::MoveCarlGoal moveGoal;
+  moveGoal.location = carl_navigation::MoveCarlGoal::INTERACTION_2;
+  moveCarlClient.sendGoal(moveGoal);
+  moveCarlClient.waitForResult(ros::Duration(60.0));
+  */
 
   ROS_INFO("Finished.");
 }
@@ -117,13 +182,13 @@ void SequentialTasks::obtainObject(int location, string object, string surfaceLi
   }
   ROS_INFO("Object obtained.");
 
-  ROS_INFO("Readying arm...");
+  ROS_INFO("Homing arm...");
   //ready arm
-  carl_moveit::ArmGoal readyGoal;
-  readyGoal.action = carl_moveit::ArmGoal::READY;
-  armClient.sendGoal(readyGoal);
-  armClient.waitForResult(ros::Duration(20.0));
-  bool success = armClient.getResult()->success;
+  wpi_jaco_msgs::HomeArmGoal homeGoal;
+  homeGoal.retract = false;
+  armHomeClient.sendGoal(homeGoal);
+  armHomeClient.waitForResult(ros::Duration(20.0));
+  bool success = armHomeClient.getResult()->success;
   if (!success)
   {
     ROS_INFO("Could not ready arm after storing object.");
