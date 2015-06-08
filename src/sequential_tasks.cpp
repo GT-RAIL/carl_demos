@@ -21,6 +21,7 @@ SequentialTasks::SequentialTasks() :
 
 void SequentialTasks::packSchoolBag()
 {
+  /*
   //notebook
   obtainObject(carl_navigation::MoveCarlGoal::COFFEE_TABLE, "notebook", "coffee_table_surface_link");
 
@@ -40,8 +41,9 @@ void SequentialTasks::packSchoolBag()
     ROS_INFO("Could not call look at frame client!");
     return;
   }
+  */
 
-  /*
+
   //tape
   obtainObject(carl_navigation::MoveCarlGoal::KITCHEN_TABLE, "tape", "kitchen_table_surface_link");
 
@@ -61,7 +63,7 @@ void SequentialTasks::packSchoolBag()
     ROS_INFO("Could not call look at frame client!");
     return;
   }
-  */
+
 
   /*
   //pens
@@ -74,8 +76,7 @@ void SequentialTasks::packSchoolBag()
   obtainObject(carl_navigation::MoveCarlGoal::KITCHEN_TABLE, "scissors", "kitchen_table_surface_link");
 
   //look for apple
-  //TODO: figure out counter surface link name
-  checkSurface(carl_navigation::MoveCarlGoal::FRIDGE, "");
+  checkSurface(carl_navigation::MoveCarlGoal::FRIDGE, "kitchen_counter_right_surface_link");
 
   //get feedback
   carl_navigation::MoveCarlGoal moveGoal;
@@ -94,8 +95,7 @@ void SequentialTasks::packSchoolBag()
 
   /*
   //orange
-  //TODO: figure out counter surface link name
-  obtainObject(carl_navigation::MoveCarlGoal::FRIDGE, "");
+  obtainObject(carl_navigation::MoveCarlGoal::FRIDGE, "kitchen_counter_right_surface_link");
 
   //return bag
   carl_navigation::MoveCarlGoal moveGoal;
