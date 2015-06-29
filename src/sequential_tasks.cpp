@@ -1,12 +1,11 @@
 #include <carl_demos/sequential_tasks.h>
-#include "../../../devel/include/wpi_jaco_msgs/HomeArmGoal.h"
 
 using namespace std;
 
 SequentialTasks::SequentialTasks() :
     armClient("carl_moveit_wrapper/common_actions/arm_action"),
     armHomeClient("jaco_arm/home_arm"),
-    obtainObjectClient("carl_moveit_wrapper/high_level_actions/obtain_object"),
+    obtainObjectClient("carl_demos/obtain_object"),
     moveCarlClient("move_carl")
 {
   lookAtFrameClient = n.serviceClient<carl_dynamixel::LookAtFrame>("/asus_controller/look_at_frame");
@@ -168,13 +167,13 @@ void SequentialTasks::obtainObject(int location, string object, string surfaceLi
 
   ROS_INFO("Obtaining object...");
   //obtain given object
-  carl_moveit::ObtainObjectGoal obtainGoal;
+  carl_demos::ObtainObjectGoal obtainGoal;
   obtainGoal.lift = true;
   obtainGoal.verify = false;
   obtainGoal.object_name = object;
   obtainObjectClient.sendGoal(obtainGoal);
   obtainObjectClient.waitForResult(ros::Duration(60.0));
-  carl_moveit::ObtainObjectResultConstPtr obtainResult = obtainObjectClient.getResult();
+  carl_demos::ObtainObjectResultConstPtr obtainResult = obtainObjectClient.getResult();
   if (!obtainResult->success)
   {
     ROS_INFO("Failed to obtain requested object.");

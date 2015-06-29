@@ -24,6 +24,8 @@
   <build_depend>carl_navigation</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>libespeak-dev</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>rail_manipulation_msgs</build_depend>
   <build_depend>roscpp</build_depend>
 
   <run_depend>actionlib</run_depend>
@@ -35,6 +37,8 @@
   <run_depend>geometry_msgs</run_depend>
   <run_depend>interactive_marker_proxy</run_depend>
   <run_depend>libespeak-dev</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>rail_manipulation_msgs</run_depend>
   <run_depend>rail_user_queue_manager</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>tf2_web_republisher</run_depend>
