@@ -42,6 +42,9 @@ install:
   - git clone https://github.com/ros-perception/perception_pcl.git -b indigo-devel
   - git clone https://github.com/ros/common_msgs.git -b indigo-devel
   - git clone https://github.com/ros/geometry_experimental.git -b indigo-devel
+  - mkdir carl_description
+  - mkdir jaco_description
+  - mkdir carl_dynamixel
   - mv geometry_experimental/tf2_sensor_msgs .
   - mv carl_bot/carl_description/* carl_description/
   - mv wpi_jaco/jaco_description/* jaco_description/
