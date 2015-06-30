@@ -46,6 +46,7 @@ install:
   - mkdir jaco_description
   - mkdir carl_dynamixel
   - mv geometry_experimental/tf2_sensor_msgs .
+  - mv geometry_experimental/tf2 .
   - mv carl_bot/carl_description/* carl_description/
   - mv wpi_jaco/jaco_description/* jaco_description/
   - mv carl_bot/carl_dynamixel/* carl_dynamixel/
