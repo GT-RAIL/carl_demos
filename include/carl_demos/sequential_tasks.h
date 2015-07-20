@@ -30,8 +30,17 @@ public:
   */
   void packSchoolBag();
 
+  void makeFruitBasket();
+
   void checkSurface(int location, std::string surfaceLink);
 
+  /**
+   * \brief Navigate to a surface, pick up an object, and store it on the robot
+   *
+   * \param location navigation location, pass -1 for no navigation
+   * \param object name of the object to pick up
+   * \param surfaceLink name of the surface link to look at (only used if navigation is specified)
+   */
   void obtainObject(int location, std::string object, std::string surfaceLink);
 
 private:

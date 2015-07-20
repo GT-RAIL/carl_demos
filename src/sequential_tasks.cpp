@@ -18,6 +18,24 @@ SequentialTasks::SequentialTasks() :
   ROS_INFO("Initialized.");
 }
 
+void SequentialTasks::makeFruitBasket()
+{
+  ROS_INFO("*************************************************");
+  ROS_INFO("Apple");
+  ROS_INFO("*************************************************");
+  obtainObject(-1, "apple", "kitchen_table_surface_link");
+
+  ROS_INFO("*************************************************");
+  ROS_INFO("Orange");
+  ROS_INFO("*************************************************");
+  obtainObject(-1, "orange", "kitchen_table_surface_link");
+
+  ROS_INFO("*************************************************");
+  ROS_INFO("Banana");
+  ROS_INFO("*************************************************");
+  obtainObject(-1, "banana", "kitchen_table_surface_link");
+}
+
 void SequentialTasks::packSchoolBag()
 {
   /*
@@ -146,24 +164,26 @@ void SequentialTasks::checkSurface(int location, std::string surfaceLink)
 
 void SequentialTasks::obtainObject(int location, string object, string surfaceLink)
 {
-  ROS_INFO("Navigating to new location...");
-  //navigate to given location
-  carl_navigation::MoveCarlGoal moveGoal;
-  moveGoal.location = location;
-  moveCarlClient.sendGoal(moveGoal);
-  moveCarlClient.waitForResult(ros::Duration(60.0));
-  ROS_INFO("Navigation complete.");
-
-  ROS_INFO("Looking at surface...");
-  //look at surface
-  carl_dynamixel::LookAtFrame lookSrv;
-  lookSrv.request.frame = surfaceLink;
-  if (!lookAtFrameClient.call(lookSrv))
+  if (location != -1)
   {
-    ROS_INFO("Could not call look at frame client!");
-    return;
+    ROS_INFO("Navigating to new location...");
+    //navigate to given location
+    carl_navigation::MoveCarlGoal moveGoal;
+    moveGoal.location = location;
+    moveCarlClient.sendGoal(moveGoal);
+    moveCarlClient.waitForResult(ros::Duration(60.0));
+    ROS_INFO("Navigation complete.");
+
+    ROS_INFO("Looking at surface...");
+    //look at surface
+    carl_dynamixel::LookAtFrame lookSrv;
+    lookSrv.request.frame = surfaceLink;
+    if (!lookAtFrameClient.call(lookSrv)) {
+      ROS_INFO("Could not call look at frame client!");
+      return;
+    }
+    ROS_INFO("Looking at surface complete.");
   }
-  ROS_INFO("Looking at surface complete.");
 
   ROS_INFO("Obtaining object...");
   //obtain given object
@@ -202,7 +222,7 @@ int main(int argc, char **argv)
 
   SequentialTasks st;
 
-  st.packSchoolBag();
+  st.makeFruitBasket();
 
   ROS_INFO("Action teminated.");
 
