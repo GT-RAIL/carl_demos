@@ -57,7 +57,6 @@ void SpecificActions::executeObtainObject(const carl_demos::ObtainObjectGoalCons
   bool finished = false;
   while (!finished)
   {
-    ROS_INFO("Recognized objects counter: %d", recognizedObjectsCounter);
     {
       boost::mutex::scoped_lock lock(recognizedObjectsMutex);
       finished = recognizedObjectsCounter == 2;
