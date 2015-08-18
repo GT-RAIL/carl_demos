@@ -2,6 +2,26 @@
 Changelog for package carl_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.8 (2015-08-18)
+------------------
+* update
+* Merge branch 'develop' of github.com:WPI-RAIL/carl_demos into develop
+* Added fruit basket task
+* Update .travis.yml
+* Update .travis.yml
+* Update .travis.yml
+* Update .travis.yml
+* Update .travis.yml
+* Update .travis.yml
+* Moved obtain object action into demos
+* Updated surface link name
+* Used Kinova home to get out of a bad position
+* updated sequential tasks demo for packing a schoolbag
+* debugging sequential task executer
+* Merge branch 'develop' of github.com:WPI-RAIL/carl_demos into develop
+* Added a sequential task executor for preprogrammed demo tasks.
+* Contributors: David Kent
+
 0.0.7 (2015-05-08)
 ------------------
 * fixes name of queue
