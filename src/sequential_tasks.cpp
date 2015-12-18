@@ -147,8 +147,8 @@ void SequentialTasks::checkSurface(int location, std::string surfaceLink)
 
   ROS_INFO("Retracting arm...");
   //retract arm
-  carl_moveit::ArmGoal retractGoal;
-  retractGoal.action = carl_moveit::ArmGoal::RETRACT;
+  rail_manipulation_msgs::ArmGoal retractGoal;
+  retractGoal.action = rail_manipulation_msgs::ArmGoal::RETRACT;
   armClient.sendGoal(retractGoal);
   armClient.waitForResult(ros::Duration(20.0));
   bool success = armClient.getResult()->success;
