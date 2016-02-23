@@ -2,6 +2,19 @@
 Changelog for package carl_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.9 (2016-02-23)
+------------------
+* Update .travis.yml
+* Update .travis.yml
+* Update .travis.yml
+* Update .travis.yml
+* Update .travis.yml
+* Update README.md
+* Update package.xml
+* Merge branch 'develop' of github.com:WPI-RAIL/carl_demos into develop
+* Updates for new rail_manipulation_msgs
+* Contributors: David Kent
+
 0.0.8 (2015-08-18)
 ------------------
 * update

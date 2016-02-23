@@ -6,7 +6,7 @@
 #include <boost/thread/mutex.hpp>
 #include <carl_dynamixel/LookAtFrame.h>
 #include <carl_demos/ObtainObjectAction.h>
-#include <carl_moveit/ArmAction.h>
+#include <rail_manipulation_msgs/ArmAction.h>
 #include <carl_navigation/MoveCarlAction.h>
 #include <wpi_jaco_msgs/HomeArmAction.h>
 
@@ -48,7 +48,7 @@ private:
 
   ros::ServiceClient lookAtFrameClient;
 
-  actionlib::SimpleActionClient<carl_moveit::ArmAction> armClient;
+  actionlib::SimpleActionClient<rail_manipulation_msgs::ArmAction> armClient;
   actionlib::SimpleActionClient<wpi_jaco_msgs::HomeArmAction> armHomeClient;
   actionlib::SimpleActionClient<carl_demos::ObtainObjectAction> obtainObjectClient;
   actionlib::SimpleActionClient<carl_navigation::MoveCarlAction> moveCarlClient;

@@ -7,9 +7,9 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/thread/mutex.hpp>
 #include <carl_demos/ObtainObjectAction.h>
-#include <carl_moveit/ArmAction.h>
-#include <carl_moveit/PickupAction.h>
-#include <carl_moveit/StoreAction.h>
+#include <rail_manipulation_msgs/ArmAction.h>
+#include <rail_manipulation_msgs/PickupAction.h>
+#include <rail_manipulation_msgs/StoreAction.h>
 #include <rail_manipulation_msgs/SegmentedObjectList.h>
 #include <std_srvs/Empty.h>
 
@@ -33,9 +33,9 @@ private:
 
   ros::ServiceClient segmentClient;
 
-  actionlib::SimpleActionClient<carl_moveit::ArmAction> armClient;
-  actionlib::SimpleActionClient<carl_moveit::PickupAction> pickupClient;
-  actionlib::SimpleActionClient<carl_moveit::StoreAction> storeClient;
+  actionlib::SimpleActionClient<rail_manipulation_msgs::ArmAction> armClient;
+  actionlib::SimpleActionClient<rail_manipulation_msgs::PickupAction> pickupClient;
+  actionlib::SimpleActionClient<rail_manipulation_msgs::StoreAction> storeClient;
   actionlib::SimpleActionServer<carl_demos::ObtainObjectAction> obtainObjectServer;
 
   int recognizedObjectsCounter;

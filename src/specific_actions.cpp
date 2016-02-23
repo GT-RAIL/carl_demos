@@ -25,8 +25,8 @@ void SpecificActions::executeObtainObject(const carl_demos::ObtainObjectGoalCons
   result.success = false;
 
   //retract arm
-  carl_moveit::ArmGoal retractGoal;
-  retractGoal.action = carl_moveit::ArmGoal::RETRACT;
+  rail_manipulation_msgs::ArmGoal retractGoal;
+  retractGoal.action = rail_manipulation_msgs::ArmGoal::RETRACT;
   armClient.sendGoal(retractGoal);
   bool completed = armClient.waitForResult(ros::Duration(20.0));
   bool succeeded = (armClient.getState() == actionlib::SimpleClientGoalState::SUCCEEDED);
@@ -72,7 +72,7 @@ void SpecificActions::executeObtainObject(const carl_demos::ObtainObjectGoalCons
     if (recognizedObjects.objects[i].name == objectName)
     {
       ROS_INFO("Found object! Attempting pickup...");
-      carl_moveit::PickupGoal pickupGoal;
+      rail_manipulation_msgs::PickupGoal pickupGoal;
       pickupGoal.lift = goal->lift;
       pickupGoal.verify = goal->verify;
 
@@ -83,7 +83,7 @@ void SpecificActions::executeObtainObject(const carl_demos::ObtainObjectGoalCons
         pickupClient.sendGoal(pickupGoal);
         pickupClient.waitForResult(ros::Duration(30.0));
 
-        carl_moveit::PickupResultConstPtr pickupResult = pickupClient.getResult();
+        rail_manipulation_msgs::PickupResultConstPtr pickupResult = pickupClient.getResult();
         if (!pickupResult->success)
         {
           ROS_INFO("PICKUP FAILED, moving on to a new grasp...");
@@ -109,7 +109,7 @@ void SpecificActions::executeObtainObject(const carl_demos::ObtainObjectGoalCons
   }
 
   //Store object on robot
-  carl_moveit::StoreGoal storeGoal;
+  rail_manipulation_msgs::StoreGoal storeGoal;
   storeClient.sendGoal(storeGoal);
   storeClient.waitForResult(ros::Duration(30.0));
   success = storeClient.getResult()->success;

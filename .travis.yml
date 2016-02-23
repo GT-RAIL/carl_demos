@@ -15,30 +15,32 @@ install:
   - sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu precise main" > /etc/apt/sources.list.d/ros-latest.list'
   - wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
   - sudo apt-get update -qq
-  - sudo apt-get install python-catkin-pkg python-rosdep ros-hydro-catkin -qq
+  - sudo apt-get install python-catkin-pkg python-rosdep ros-hydro-catkin libboost-random-dev -qq
+  - sudo apt-get remove -y mongodb mongodb-10gen
+  - sudo apt-get install -y mongodb-clients mongodb-server -o Dpkg::Options::="--force-confdef"
   - sudo rosdep init
   - rosdep update
   - mkdir -p /tmp/ws/src
   - ln -s `pwd` /tmp/ws/src/package
   - cd /tmp/ws/src
-  - git clone https://github.com/WPI-RAIL/carl_navigation.git
-  - git clone https://github.com/WPI-RAIL/carl_moveit.git
-  - git clone https://github.com/WPI-RAIL/rail_user_queue_manager.git
-  - git clone https://github.com/WPI-RAIL/carl_safety.git
+  - git clone https://github.com/GT-RAIL/carl_navigation.git
+  - git clone https://github.com/GT-RAIL/carl_moveit.git
+  - git clone https://github.com/GT-RAIL/rail_user_queue_manager.git
+  - git clone https://github.com/GT-RAIL/carl_safety.git
   - git clone https://github.com/RIVeR-Lab/wpi_jaco.git
-  - git clone https://github.com/WPI-RAIL/carl_bot.git
-  - git clone https://github.com/WPI-RAIL/spatial_temporal_learning.git
-  - git clone https://github.com/WPI-RAIL/python_ethernet_rmp.git
-  - git clone https://github.com/WPI-RAIL/battery_monitor_rmp.git
-  - git clone https://github.com/WPI-RAIL/ros_ethernet_rmp.git
-  - git clone https://github.com/WPI-RAIL/rmp_msgs.git
-  - git clone https://github.com/WPI-RAIL/m4atx_battery_monitor.git
-  - git clone https://github.com/WPI-RAIL/rail_manipulation_msgs.git
-  - git clone https://github.com/WPI-RAIL/rail_segmentation.git
-  - git clone https://github.com/WPI-RAIL/rail_pick_and_place.git
+  - git clone https://github.com/GT-RAIL/carl_bot.git
+  - git clone https://github.com/GT-RAIL/spatial_temporal_learning.git
+  - git clone https://github.com/GT-RAIL/python_ethernet_rmp.git
+  - git clone https://github.com/GT-RAIL/battery_monitor_rmp.git
+  - git clone https://github.com/GT-RAIL/ros_ethernet_rmp.git
+  - git clone https://github.com/GT-RAIL/rmp_msgs.git
+  - git clone https://github.com/GT-RAIL/m4atx_battery_monitor.git
+  - git clone https://github.com/GT-RAIL/rail_manipulation_msgs.git
+  - git clone https://github.com/GT-RAIL/rail_segmentation.git
+  - git clone https://github.com/GT-RAIL/rail_pick_and_place.git -b develop-no-opencv-nonfree
   - git clone https://github.com/sniekum/ar_track_alvar_msgs.git
-  - git clone https://github.com/WPI-RAIL/rail_ceiling.git
-  - git clone https://github.com/WPI-RAIL/rail_collada_models.git
+  - git clone https://github.com/GT-RAIL/rail_ceiling.git
+  - git clone https://github.com/GT-RAIL/rail_collada_models.git
   - git clone https://github.com/ros-perception/perception_pcl.git -b indigo-devel
   - git clone https://github.com/ros/common_msgs.git -b indigo-devel
   - git clone https://github.com/ros/geometry_experimental.git -b indigo-devel
@@ -46,12 +48,12 @@ install:
   - mkdir jaco_description
   - mkdir carl_dynamixel
   - mv geometry_experimental/tf2_sensor_msgs .
-  - mv geometry_experimental/tf2 .
   - mv carl_bot/carl_description/* carl_description/
   - mv wpi_jaco/jaco_description/* jaco_description/
   - mv carl_bot/carl_dynamixel/* carl_dynamixel/
   - mv wpi_jaco/wpi_jaco_msgs .
   - rm -rf carl_bot wpi_jaco
+  - rm -rf geometry_experimental
   - cd ../
   - rosdep install --from-paths src --ignore-src --rosdistro hydro -y
 

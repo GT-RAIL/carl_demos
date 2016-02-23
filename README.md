@@ -1,4 +1,4 @@
-carl_demos [![Build Status](https://api.travis-ci.org/WPI-RAIL/carl_demos.png)](https://travis-ci.org/WPI-RAIL/carl_demos)
+carl_demos [![Build Status](https://api.travis-ci.org/GT-RAIL/carl_demos.png)](https://travis-ci.org/GT-RAIL/carl_demos)
 ==========
 
 #### Demo Applications for CARL
